@@ -1,0 +1,10 @@
+<%= form_tag items_path, method: :get do %>
+  Search for Items by Location <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag 'Search', :name => nil %>
+<% end %>
+
+    <ul> <% @items.each do |i| %>
+    <br><h3><li>∇ <%= link_to i.name, user_item_path(i.user_id, i) %> ∇</h3>
+     : Located in <%= i.user.city unless i.user == nil %>, <%= i.user.state unless i.user == nil %> :
+    <p> Availability: <%= i.available? %></li> </p>
+    <% end %></ul>

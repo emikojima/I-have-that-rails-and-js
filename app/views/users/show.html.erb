@@ -1,0 +1,39 @@
+<div class=form>
+  <% if current_user.id == params[:id].to_i  %>
+      <p>Δ Δ Δ</p>
+      <h3 >Hello, <%= @user.name %>.</h3>
+      Your Email: <%= @user.email %><br>
+        <% if @user.city.blank?|| @user.state.blank? %>
+          <%= flash[:message] = "PLEASE ADD YOUR LOCATION" %>
+          <h4><%= link_to "⊳⊳ HERE ⊲⊲", edit_user_path(@user) %></h4>
+        <% else %>
+          Your Location: <%= @user.city %>, <%= @user.state %>
+        <% end %>
+      <br><p>∇ ∇ ∇</p>
+      <br> Your Items:
+          <% if @user.items.empty? %>
+              <%= "You have no items listed for lending." %><br>
+          <% else %>
+              <ul><li> <% @user.items.each do |i| %>
+                <h4> ◦ <%= link_to i.name, user_item_path(@user, i) %> ◦ </h4>
+              <% end %> </li></ul><br>
+          <% end %>
+      <h5><%= link_to "Add item", new_user_item_path(@user) %></h5>
+      <h5><%= link_to "Edit Your Profile", edit_user_path(@user) %></h5>
+  <% else %>
+    <p>Δ Δ Δ</p>
+    <h3 >User: <%= @user.name %></h3>
+    Location: <%= @user.city %>, <%= @user.state %><br>
+    <p>∇ ∇ ∇</p><br>
+    Items for lending:<br>
+    <% if @user.items.empty? %>
+      <%= "There are no items listed for lending." %><br>
+    <% else %>
+      <ul>
+      <li> <% @user.items.each do |i| %>
+      <h4>◦ <%= link_to i.name, user_item_path(@user, i) %> ◦</h4>
+      <p>Item Availability: <%= i.available? %></p>  <br>
+      <% end %> </li></ul>
+    <% end %>
+  <% end %>
+</div>

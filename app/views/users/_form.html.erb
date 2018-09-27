@@ -1,0 +1,15 @@
+<%=form_for @user do |f| %>
+<%= f.label :name, "Username" %>
+<%= f.text_field :name%><br>
+<%= f.label :email %>
+<%= f.email_field :email %><br>
+<%= f.label :city, "Your City" %>
+<%= f.text_field :city%>
+<%= f.label :state, "and State" %>
+<%= f.text_field :state, maxlength: 2 %><br>
+<%= f.label :password %>
+<%= f.password_field :password %>
+<%= f.label :password_confirmation %>
+<%= f.password_field :password_confirmation %><br>
+<%= f.submit %>
+<% end %>

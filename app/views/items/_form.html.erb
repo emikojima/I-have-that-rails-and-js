@@ -1,0 +1,13 @@
+<%= form_for [@user, @item] do |f| %>
+  <%= f.hidden_field :user_id %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.label :description %>
+  <%= f.text_field :description %><br>
+  <%= f.label :category_id, "Item Category" %>
+  <%= f.collection_select(:category_id, Category.all, :id, :name, { :prompt => 'Select a Category' }) %><br>
+  <%= f.label :available, "Check this box if this item is available for lending"%>
+  <%= f.check_box :available %><br>
+  Didn't see a category for your item? Create one <%= link_to "⊳⊳ HERE ⊲⊲", new_category_path %><br>
+  <%= f.submit %>
+<% end %>

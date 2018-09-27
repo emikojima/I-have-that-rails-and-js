@@ -1,0 +1,187 @@
+@media screen {
+  * {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+
+
+  html, body {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  /* --- Page Styles --- */
+  body {
+   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+   line-height:  1.6;
+    background: url("nature3.jpg");
+    background-size: 130%;
+
+  }
+
+  a:link {
+      color: black;
+       text-decoration: none;
+  }
+
+  a:visited {
+    color: black;
+  }
+
+  a:hover {
+      color: hotpink;
+  }
+
+  a:active {
+      color: blue;
+  }
+
+  .wrapper {
+    background-color:#f7f6ea;
+    opacity: 0.9;
+    border: 25px;
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    margin:50px auto;
+    max-width: 960px;
+    padding: 2.25%; /* 18px / 800px */
+    width: 85%;
+  }
+  /* .image_responsive_main_page {
+  background: url("nature1.jpg") no-repeat;
+   background-size: 100% 100%;
+ } */
+
+  .end {
+    background:lightgray;
+    text-align: center;
+  }
+
+  .form {
+    text-align: center;
+  }
+
+  .headerbox {
+    width: auto;
+    height: auto;
+    padding: 45px;
+    border: 1px solid gray;
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    margin:30px auto;
+    font-size: 150%;
+}
+  .flash {
+    opacity: none;
+    box-shadow: 0 10px 10px rgba(0,0,0,.3);
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 110%;
+    background: #0000FF;
+    text-align:center;
+    color:white;
+  }
+  .error {
+    font-family: "Times New Roman", Times, serif;
+    color : red;
+    width: 100%;
+  }
+
+  .field_with_errors {
+      border: 1px solid red;
+      display: inline; 
+  }
+
+  ol {
+    text-align: center;
+  }
+
+  li {
+      text-align: center;
+  }
+
+  p {
+    font-size: 90%;
+  }
+
+  .main {
+    overflow: hidden;
+  }
+
+  .content {
+    float: left;
+    width: 60%; /* 480px / 800px */
+  }
+
+  .sidebar {
+    background: #eee;
+    border: 1px solid #ccc;
+    float: right;
+    padding: 2.08333333333%; /* 5px / 240px */
+    width: 30%; /* 240px / 800px */
+  }
+
+  .sidebar ul {
+    font-size: 14px;
+  }
+
+  .branding {
+    clear: both;
+  }
+
+  footer.branding {
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: lightgray;
+    opacity: .9;
+    font-size: small;
+     font-weight: bold;
+
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    width: auto;
+  }
+
+  .content, .sidebar {
+    float: none;
+    width: 100%;
+  }
+
+  .sidebar {
+    background: transparent;
+    border: none;
+    border-top: 2px solid #ccc;
+    padding: 0;
+  }
+
+
+}
+
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */

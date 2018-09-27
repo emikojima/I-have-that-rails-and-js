@@ -1,0 +1,5 @@
+<h2><%= @user.name %>'s Items</h2>
+<ul><% @items.each do |i| %>
+  <li><%= link_to i.name, user_item_path(@user,i) %></li>
+  <% end %>
+</ul>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IHaveThatV2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="img-responsive main-image">
+  <!-- <ul class="topnav">
+  <li><a class="active" href="/items">Home</a></li>
+  <li><a href="/user">Community</a></li>
+  <li><a href="mailto:emi@test.com">Contact Us</a></li>
+   <li class="right"><a href="/logout">Log Out</a></li>
+   </ul> -->
+  <!-- <img src="images/corneal-small.png" class="img-responsive main-image"></header> -->
+  <div class="wrapper">
+    <div class="headerbox">
+    <h1>I HAVE THAT!</h1>
+    <p>◦ Lend ◦ Borrow ◦ Share ◦</p>
+
+    </div>
+    <div class="error">
+      <% if @error != nil %>
+        <% @error.each do |e| %>
+        <li><%= e %></li>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="flash">
+      <% flash.each do |key, value| %>
+         <div class="alert alert-<%= key %>"><%= value %></div>
+       <% end %>
+    </div>
+
+    <%= yield %>
+
+  <footer class="branding">
+    <%if controller_name != "sessions" && logged_in?%>
+      <%=link_to "My Profile", user_path(current_user)%><br>
+      <%=link_to "Community", users_path%><br>
+      <%=link_to "All Items", items_path%><br>
+      <%=link_to "Items by Category", categories_path%><br>
+      <%=link_to "Log Out", '/logout'%><br>
+    <% end %>
+    <small>&copy; 2018 <strong>I Have That (IHC)</strong></small>
+  </footer>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<!--[if lt IE 7]>
+  <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+  <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+<![endif]-->
+  </body>
+</html>
