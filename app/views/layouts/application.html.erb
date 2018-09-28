@@ -35,13 +35,17 @@
        <% end %>
     </div>
 
+
+
     <%= yield %>
+    <div id="js-title"></div>
+    <div id="js-container"></div>
 
   <footer class="branding">
     <%if controller_name != "sessions" && logged_in?%>
       <%=link_to "My Profile", user_path(current_user)%><br>
-      <%=link_to "Community", users_path%><br>
-      <%=link_to "All Items", items_path%><br>
+      <%=link_to "Community", users_path, class: "users" %><br>
+      <%=link_to "All Items", items_path, class: "items"%><br>
       <%=link_to "Items by Category", categories_path%><br>
       <%=link_to "Log Out", '/logout'%><br>
     <% end %>
