@@ -11,14 +11,24 @@ class Item {
     this.description = i.description;
     this.available = i.available;
     this.user_id = i.user_id;
+    this.user = i.user
   }
   formatIndex() {
     let itemHtml = `
     <h3><a id="${this.id}" onclick="getThis(${this.user_id},${this.id})"> ∇ ${this.name} ∇ </a></h3>
     <p> ${this.description}</p>
+    <p> From: ${this.user.name} @ ${this.user.city}, ${this.user.state}</p>
     <p> Availabile? ${this.available}</p><br>
     `
     return itemHtml
+  }
+
+  formatEmail() {
+    let emailHtml = `
+    <a href="mailto:${this.user.name}?subject=Message from IHT Re: ${this.name} &body=Message sent from IHT (I HAVE THAT App) ">
+    Email ${this.user.name} to borrow this item </a>
+    `
+    return emailHtml
   }
 }
 
@@ -34,12 +44,15 @@ class Item {
     })
   }
 
-  function getThis(uid) {
-    debugger
-    $.get((`users/${uid}/items/${id}.json`), function(data) {
-      debugger
+  function getThis(uid,id) {
+    clear()
+    $.get((`/users/${uid}/items/${id}.json`), function(data) {
+      let newIt = new Item(data)
+      let ni = newIt.formatEmail()
+      $('#everything').append(ni)
     })
   }
+
   function attachEventListeners() {
 
     $('.items-list').on('click', function(e) {

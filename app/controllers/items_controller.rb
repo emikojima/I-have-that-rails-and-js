@@ -34,7 +34,7 @@ class ItemsController < ApplicationController
   def show
     respond_to do |f|
       f.html
-      f.json {render json: @item, :include => @user}
+      f.json {render json: @item, include: ['@user']}
     end
   end
 
