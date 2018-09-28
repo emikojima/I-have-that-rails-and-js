@@ -13,6 +13,10 @@ class ItemsController < ApplicationController
 
    def index
     @items = @user.items
+    respond_to do |f|
+      f.html
+      f.json {render json: @items}
+    end
    end
 
   def create
@@ -28,10 +32,18 @@ class ItemsController < ApplicationController
   end
 
   def show
+    respond_to do |f|
+      f.html
+      f.json {render json: @item, :include => @user}
+    end
   end
 
   def all
     @items = Item.search_items(params[:search])
+    respond_to do |f|
+      f.html
+      f.json {render json: @items}
+    end
     if @items.empty?
       flash[:message] = "Oh no! There are no items for lending in #{params[:search].titleize}."
       redirect_to items_path

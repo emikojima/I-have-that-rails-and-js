@@ -47,7 +47,7 @@
     <%if controller_name != "sessions" && logged_in?%>
       <%=link_to "My Profile", user_path(current_user)%><br>
       <%=link_to "Community", users_path, class: "users" %><br>
-      <%=link_to "All Items", items_path, class: "items"%><br>
+      <%=link_to "All Items", items_path, class: "items-list"%><br>
       <%=link_to "Items by Category", categories_path%><br>
       <%=link_to "Log Out", '/logout'%><br>
     <% end %>

@@ -22,22 +22,28 @@ function clear() {
 
 function userLink(id) {
     $.get(`/users/${id}.json`, function(data){
-      var items = data.items
+      var its = data.items
       clear()
       $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "User: " + `${data.name}` + "</h3><p>" + "Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Items for Lending: " + "</h4><br>")
 
-      items.forEach((item) =>
-      $('#js-container').append(`<h4>◦ ${item.name} ◦</h4><p> Description:  ${item.description} </p> <p> Availabile: ${item.available} </p><br>`))
+      its.forEach((i) =>
+      $('#js-container').append(`<h4>◦ ${i.name} ◦</h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`))
 
       $('#js-next').html(`<button id="${id + 1}" onclick="userLink(${id + 1})">   Next User </button>`)
     })
 }
+
+
+
+
 
 function attachListeners() {
   $('.users').on('click', function(e) {
     e.preventDefault()
     getUsers()
   })
+
+
 
 
 
