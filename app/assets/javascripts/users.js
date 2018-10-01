@@ -76,19 +76,18 @@ function attachListeners() {
     getMyPage(this.id)
   })
 
-  $('#everything').on('submit', "#new_item", function(e) {
+  $('#js-next').on('submit', "#new_item", function(e) {
+    alert("i've hit debugger")
     e.preventDefault()
+
     $.ajax({
       type: ($("input[name='_method']").val() || this.method),
       url: this.action,
       data: $(this).serialize(),
-      success: function(data) {
-        debugger
-      
+      success: function(response){
+        $('#js-container').append(response)
       }
     })
-
-
   })
 
 
