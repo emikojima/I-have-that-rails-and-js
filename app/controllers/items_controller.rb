@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
     if own_page?
       @item  = Item.new(user_id: @user.id)
       @catgories = Category.all
+      render layout: false
     else
       redirect_to user_path(current_user)
     end
@@ -24,7 +25,8 @@ class ItemsController < ApplicationController
     @user = User.find(params[:user_id])
     if @item.save
       flash[:message] = "Item successfully created."
-      redirect_to user_item_path(@user, @item)
+      render :one, :layout => false
+      # redirect_to user_item_path(@user, @item)
     else
       @error = @item.errors.full_messages
       render 'new'

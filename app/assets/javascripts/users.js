@@ -33,6 +33,33 @@ function userLink(id) {
     })
 }
 
+function getMyPage(id) {
+
+  $.get((`/users/${id}.json`), function(data) {
+    var current = data.id
+    var its = data.items
+    clear()
+
+    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Your Items - Click to Edit: " + "</h4><br>")
+
+    $('#js-next').append(`<a onclick="addItem(${current})"> Add an Item </a>`)
+
+    its.forEach((i) =>
+    $('#js-container').append(`<h4><a onclick="editThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><br>`))
+
+  })
+
+}
+
+function addItem(id) {
+  $.get((`/users/${id}/items/new`), function(data){
+
+  $('#js-next').html(data)
+  })
+
+
+}
+
 
 
 
@@ -43,6 +70,26 @@ function attachListeners() {
     getUsers()
   })
 
+
+  $('.me').on('click', function(e) {
+    e.preventDefault()
+    getMyPage(this.id)
+  })
+
+  $('#everything').on('submit', "#new_item", function(e) {
+    e.preventDefault()
+    $.ajax({
+      type: ($("input[name='_method']").val() || this.method),
+      url: this.action,
+      data: $(this).serialize(),
+      success: function(data) {
+        debugger
+      
+      }
+    })
+
+
+  })
 
 
 

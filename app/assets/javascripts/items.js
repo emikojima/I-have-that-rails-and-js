@@ -50,8 +50,10 @@ class Item {
         $('#js-container').append(ih)
 
       })
+
     })
   }
+
 
   function getThis(uid,id) {
     clear()
@@ -69,10 +71,10 @@ class Item {
       getItems()
     })
 
-    // $(document).on('click', ".item_link", function(e)
-    //  { getItem()
-    //
-    //  })
+    $(document).on('click', "#makeItem", function(e) {
+       getLink()
+
+     })
 
 
   }
