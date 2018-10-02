@@ -25,6 +25,10 @@ class CategoriesController < ApplicationController
     else
       @categories = Category.all
     end
+    respond_to do |f|
+      f.html
+      f.json {render json: @categories}
+    end
   end
 
   def pop

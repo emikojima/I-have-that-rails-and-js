@@ -84,9 +84,6 @@ class Item {
     $.get((`/users/${uid}/items/${id}/edit`), function(form) {
       clear()
       $('#js-container').append(form)
-
-
-
   })
 }
 
@@ -111,5 +108,6 @@ class Item {
         }
       })
     })
+
 
   }
