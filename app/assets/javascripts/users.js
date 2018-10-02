@@ -40,12 +40,12 @@ function getMyPage(id) {
     var its = data.items
     clear()
 
-    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Your Items - Click Item to Edit: " + "</h4><br>")
+    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><h4>" + "Your Items" + "</h4><p>" + "(Click on Item to Edit) " + "</p>")
 
-    $('#js-next').append(`<a onclick="addItem(${current})"> Add an Item </a>`)
+    $('#js-next').append(`<br><h5><a onclick="addItem(${current})"> Add an Item </a></h5>`)
 
     its.forEach((i) =>
-    $('#js-container').append(`<h4><a onclick="editThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><br>`))
+    $('#js-container').append(`<h4><a onclick="editThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4>`))
 
   })
 
