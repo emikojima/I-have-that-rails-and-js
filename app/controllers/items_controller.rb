@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
   def show
     respond_to do |f|
       f.html
-      f.json {render json: @item, include: ['@user']}
+      f.json {render json: @item, only: ['@user']}
     end
   end
 
@@ -54,15 +54,19 @@ class ItemsController < ApplicationController
 
   def edit
     @catgories = Category.all
+    render layout: false
+
     if !own_page?
       flash[:message] = "You cannot edit someone else's item."
       redirect_to items_path
+
     end
   end
 
   def update
     @item.update(item_params)
-    redirect_to user_item_path(@user, @item)
+    render :one, :layout => false
+    # redirect_to user_item_path(@user, @item)
   end
 
   def destroy

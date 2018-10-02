@@ -20,10 +20,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @cuser = current_user if current_user
     respond_to do |f|
       f.html
-      f.json {render json: @user}
+      f.json {render :json => @user}
+
     end
   end
 

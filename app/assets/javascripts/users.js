@@ -18,6 +18,7 @@ function clear() {
   $('#js-container').empty()
   $('#js-title').empty()
   $('#js-next').empty()
+  $('#js-sub').empty()
 }
 
 function userLink(id) {
@@ -34,13 +35,12 @@ function userLink(id) {
 }
 
 function getMyPage(id) {
-
   $.get((`/users/${id}.json`), function(data) {
     var current = data.id
     var its = data.items
     clear()
 
-    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Your Items - Click to Edit: " + "</h4><br>")
+    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Your Items - Click Item to Edit: " + "</h4><br>")
 
     $('#js-next').append(`<a onclick="addItem(${current})"> Add an Item </a>`)
 
@@ -53,16 +53,10 @@ function getMyPage(id) {
 
 function addItem(id) {
   $.get((`/users/${id}/items/new`), function(data){
-
-  $('#js-next').html(data)
+  $('#js-sub').append(data)
+  $('#js-next').empty("")
   })
-
-
 }
-
-
-
-
 
 function attachListeners() {
   $('.users').on('click', function(e) {
@@ -70,13 +64,12 @@ function attachListeners() {
     getUsers()
   })
 
-
   $('.me').on('click', function(e) {
     e.preventDefault()
     getMyPage(this.id)
   })
 
-  $('#js-next').on('submit', "#new_item", function(e) {
+  $('#js-sub').on('submit', "#new_item", function(e) {
     alert("i've hit debugger")
     e.preventDefault()
 
@@ -86,10 +79,10 @@ function attachListeners() {
       data: $(this).serialize(),
       success: function(response){
         $('#js-container').append(response)
+        $('#js-sub').empty()
       }
     })
   })
-
 
 
 

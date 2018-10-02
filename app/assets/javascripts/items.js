@@ -2,8 +2,6 @@ $(function(){
   attachEventListeners();
 })
 
-
-
 class Item {
   constructor(i) {
     this.id = i.id
@@ -15,10 +13,10 @@ class Item {
   }
   formatIndex() {
     let itemHtml = `
-    <h3><a id="${this.id}" onclick="getThis(${this.user_id},${this.id})"> ∇ ${this.name} ∇ </a></h3>
+    <li><h3><a id="${this.id}" onclick="getThis(${this.user_id},${this.id})"> ∇ ${this.name} ∇ </a></h3>
     <p> ${this.description}</p>
     <p> From: ${this.user.name} @ ${this.user.city}, ${this.user.state}</p>
-    <p> Availabile? ${this.available}</p>
+    <p> Availabile? ${this.available}</p></li>
     <br>
 
     `
@@ -41,6 +39,9 @@ class Item {
 
   function getItems() {
     clear()
+    let x = `Search Items <input type="text" id="myInput" onkeyup="myFind()" placeholder="Item name ..." title="Type in a name" >`
+    $('#everything').append(x)
+
     $.get(("/items.json"), function(data) {
 
       data.forEach(item => {
@@ -54,6 +55,21 @@ class Item {
     })
   }
 
+  function myFind() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("js-container");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }}
+
 
   function getThis(uid,id) {
     clear()
@@ -64,17 +80,36 @@ class Item {
     })
   }
 
-  function attachEventListeners() {
+  function editThis(uid, id) {
+    $.get((`/users/${uid}/items/${id}/edit`), function(form) {
+      clear()
+      $('#js-container').append(form)
 
+
+
+  })
+}
+
+  function attachEventListeners() {
     $('.items-list').on('click', function(e) {
       e.preventDefault()
       getItems()
     })
 
-    $(document).on('click', "#makeItem", function(e) {
-       getLink()
+    $('#js-container').on('submit', ".edit_item", function(e) {
+      alert("Item Successfully Updated")
+      e.preventDefault()
+      $.ajax({
+        type: ($("input[name='_method']").val() || this.method),
 
-     })
-
+        url: this.action,
+        data: $(this).serialize(),
+        success: function(response){
+          clear()
+          $('#js-container').append("<h4>" + "Item Successfully Updated" + `${response}` + "</h4>")
+          $('#js-sub').empty()
+        }
+      })
+    })
 
   }
