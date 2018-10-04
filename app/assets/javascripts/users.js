@@ -22,17 +22,25 @@ function clear() {
 }
 
 function userLink(id) {
+    clear()
     $.get(`/users/${id}.json`, function(data){
+      if (data) {
       var its = data.items
-      clear()
+
       $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "User: " + `${data.name}` + "</h3><p>" + "Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Items for Lending: " + "</h4><br>")
 
       its.forEach((i) =>
       $('#js-container').append(`<h4><a onclick="getThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`))
 
       $('#js-next').html(`<button id="${id + 1}" onclick="userLink(${id + 1})">   Next User </button>`)
+      }
+        else {
+          userLink(1)
+          
+        }
     })
 }
+
 
 function getMyPage(id) {
   $.get((`/users/${id}.json`), function(data) {
@@ -46,9 +54,7 @@ function getMyPage(id) {
 
     its.forEach((i) =>
     $('#js-container').append(`<h4><a onclick="editThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4>`))
-
   })
-
 }
 
 function addItem(id) {

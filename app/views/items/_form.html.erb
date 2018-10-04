@@ -1,13 +1,14 @@
 <%= form_for [@user, @item] do |f| %>
   <%= f.hidden_field :user_id %>
-  <%= f.label :name %>
-  <%= f.text_field :name %><br>
+  <%= f.label :name  %>
+  <%= f.text_field :name, required: true %><br>
   <%= f.label :description %>
-  <%= f.text_field :description %><br>
+  <%= f.text_field :description, required: true %><br>
   <%= f.label :category_id, "Item Category" %>
-  <%= f.collection_select(:category_id, Category.all, :id, :name, { :prompt => 'Select a Category' }) %><br>
+  <%= f.collection_select(:category_id, Category.all, :id, :name, { :prompt => 'Select a Category'}, required: true) %><br>
   <%= f.label :available, "Check this box if this item is available for lending"%>
   <%= f.check_box :available %><br>
-  Didn't see a category for your item? Create one <%= link_to "⊳⊳ HERE ⊲⊲", new_category_path %><br>
+  <h5> Didn't see a category for your item?</h5>
+  <h5> Create one <%= link_to "⊳⊳ HERE ⊲⊲", new_category_path, class: "item_form" %></h5>
   <%= f.submit %>
 <% end %>

@@ -26,6 +26,11 @@ class User < ApplicationRecord
     end
 	end
 
+  def next
+    user = User.where(["id > ?", id]).first
+    user ? user : User.first
+  end
+  
   def address
   [street, city, state, country].compact.join(', ')
   end

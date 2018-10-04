@@ -18,7 +18,6 @@ class Item {
       <p> ${this.description}</p>
       <p> From: ${this.user.name} @ ${this.user.city}, ${this.user.state}</p>
       <p> Item is: ${this.available}</p><br></li>
-
       `
       return itemHtml
     }
@@ -43,17 +42,12 @@ class Item {
     clear()
     let x = `<h3>Search Items  <input type="text" id="myInput" onkeyup="myFind()" placeholder="Item name ..." title="Type in a name" ></h3> <br>`
     $('#everything').append(x)
-
     $.get(("/items.json"), function(data) {
-
       data.forEach(item => {
         let newItem = new Item(item)
         let ih = newItem.formatIndex()
-
         $('#js-container').append(ih)
-
       })
-
     })
   }
 
@@ -86,8 +80,8 @@ class Item {
     $.get((`/users/${uid}/items/${id}/edit`), function(form) {
       clear()
       $('#js-container').append(form)
-  })
-}
+    })
+  }
 
   function attachEventListeners() {
     $('.items-list').on('click', function(e) {
@@ -100,7 +94,6 @@ class Item {
       e.preventDefault()
       $.ajax({
         type: ($("input[name='_method']").val() || this.method),
-
         url: this.action,
         data: $(this).serialize(),
         success: function(response){
