@@ -79,7 +79,7 @@ class Item {
   function editThis(uid, id) {
     $.get((`/users/${uid}/items/${id}/edit`), function(form) {
       clear()
-      $('#js-container').append(form)
+      $('#js-sub').append(form)
     })
   }
 
@@ -89,7 +89,7 @@ class Item {
       getItems()
     })
 
-    $('#js-container').on('submit', ".edit_item", function(e) {
+    $('#js-sub').on('submit', ".edit_item", function(e) {
       alert("Item Successfully Updated")
       e.preventDefault()
       $.ajax({

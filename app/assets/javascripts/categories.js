@@ -34,19 +34,22 @@ function eListeners() {
     })
   })
 
-  // $('#js-container').on('submit', ".edit_item", function(e) {
-  //   alert("Item Successfully Updated")
-  //   e.preventDefault()
-  //   $.ajax({
-  //     type: ($("input[name='_method']").val() || this.method),
-  //     url: this.action,
-  //     data: $(this).serialize(),
-  //     success: function(response){
-  //       clear()
-  //       $('#js-container').append("<h4>" + "Item Successfully Updated" + `${response}` + "</h4>")
-  //       $('#js-sub').empty()
-  //     }
-  //   })
-  // })
+  $('#js-container').on('submit', ".new_category", function(e) {
+    alert("Item Successfully Updated")
+    e.preventDefault()
+    $.ajax({
+      type: ($("input[name='_method']").val() || this.method),
+      url: this.action,
+      data: $(this).serialize(),
+      success: function(response){
+
+        $('#js-container').append("<li>" + `${response}` + "</li>")
+        $('.new_category').empty()
+        $('h2').empty()
+          $('#js-title').append("<h2>" + "Categories" + "</h2>")
+
+      }
+    })
+  })
 
 }
