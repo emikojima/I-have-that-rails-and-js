@@ -21,6 +21,7 @@ function getCategories() {
 }
 
 function eListeners() {
+
   $('.categories').on('click', function(e) {
     e.preventDefault()
     getCategories()
@@ -35,7 +36,7 @@ function eListeners() {
   })
 
   $('#js-container').on('submit', ".new_category", function(e) {
-    alert("Item Successfully Updated")
+    alert("Success! Category has been added!")
     e.preventDefault()
     $.ajax({
       type: ($("input[name='_method']").val() || this.method),

@@ -1,6 +1,11 @@
-$(function(){
+$(document).on('turbolinks:load', function() {
+  alert("turbolinks:load")
   attachListeners();
 })
+// $(function(){
+//   alert("not turbolinks")
+//   attachListeners();
+// })
 
 function getUsers() {
   $.get('/users.json', function(data) {
@@ -76,7 +81,6 @@ function attachListeners() {
   })
 
   $('#js-sub').on('submit', "#new_item", function(e) {
-    alert("i've hit debugger")
     e.preventDefault()
 
     $.ajax({
