@@ -26,4 +26,27 @@ function eListeners() {
     getCategories()
   })
 
+  $('#js-sub').on("click", ".new_cat_link", function(e) {
+    e.preventDefault()
+    $.get(('/categories/new'), function(form) {
+      clear()
+      $('#js-container').append(form)
+    })
+  })
+
+  // $('#js-container').on('submit', ".edit_item", function(e) {
+  //   alert("Item Successfully Updated")
+  //   e.preventDefault()
+  //   $.ajax({
+  //     type: ($("input[name='_method']").val() || this.method),
+  //     url: this.action,
+  //     data: $(this).serialize(),
+  //     success: function(response){
+  //       clear()
+  //       $('#js-container').append("<h4>" + "Item Successfully Updated" + `${response}` + "</h4>")
+  //       $('#js-sub').empty()
+  //     }
+  //   })
+  // })
+
 }
