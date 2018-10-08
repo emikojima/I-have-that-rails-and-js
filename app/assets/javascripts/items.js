@@ -79,9 +79,23 @@ class Item {
   function editThis(uid, id) {
     $.get((`/users/${uid}/items/${id}/edit`), function(form) {
       clear()
+      let d = `<button onclick="deleteItem(${uid}, ${id})" id="deleteItem"> Delete This Item  </button>`
       $('#js-sub').append(form)
+      $('#js-sub').append(d)
     })
   }
+
+  function deleteItem(uid, id) {
+    $.ajax({
+        type: "DELETE",
+        url: `/users/${uid}/items/${id}`,
+        success: function(response) {
+            getMyPage(uid)
+            alert("Item was successfully deleted");
+        }
+    })
+  }
+
 
   function attachEventListeners() {
     $('.items-list').on('click', function(e) {
@@ -90,7 +104,6 @@ class Item {
     })
 
     $('#js-sub').on('submit', ".edit_item", function(e) {
-      alert("Item Successfully Updated")
       e.preventDefault()
       $.ajax({
         type: ($("input[name='_method']").val() || this.method),
@@ -98,6 +111,7 @@ class Item {
         data: $(this).serialize(),
         success: function(response){
           clear()
+          alert("Item Successfully Updated")
           $('#js-container').append("<h4>" + "Item Successfully Updated" + `${response}` + "</h4>")
           $('#js-sub').empty()
         }

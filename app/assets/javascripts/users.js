@@ -1,11 +1,10 @@
-$(document).on('turbolinks:load', function() {
-  alert("turbolinks:load")
-  attachListeners();
-})
-// $(function(){
-//   alert("not turbolinks")
+// $(document).on('turbolinks:load', function() {
+//   alert("turbolinks:load")
 //   attachListeners();
 // })
+$(function(){
+  attachListeners();
+})
 
 function getUsers() {
   $.get('/users.json', function(data) {
@@ -37,7 +36,7 @@ function userLink(id) {
       its.forEach((i) =>
       $('#js-container').append(`<h4><a onclick="getThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`))
 
-      $('#js-next').html(`<button id="${id + 1}" onclick="userLink(${id + 1})">   Next User </button>`)
+      $('#js-next').html(`<button id="${id + 1}" class="nexti" onclick="userLink(${id + 1})">   Next User </button>`)
       }
         else {
           userLink(1)
