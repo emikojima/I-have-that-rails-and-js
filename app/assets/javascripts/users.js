@@ -31,7 +31,7 @@ function userLink(id) {
       if (data) {
       var its = data.items
 
-      $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "User: " + `${data.name}` + "</h3><p>" + "Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Items for Lending: " + "</h4><br>")
+      $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "User: " + `${data.name}` + "</h3><p>" + "Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Items Listed for Lending: " + "</h4>")
 
       its.forEach((i) =>
       $('#js-container').append(`<h4><a onclick="getThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`))
@@ -52,7 +52,7 @@ function getMyPage(id) {
     var its = data.items
     clear()
 
-    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><h4>" + "Your Items" + "</h4><p>" + "(Click on Item to Edit) " + "</p>")
+    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Your Items" + "</h4><p>" + "(Click on Item to Edit) " + "</p>")
 
     $('#js-next').append(`<br><h5><a onclick="addItem(${current})"> Add an Item </a></h5>`)
 
@@ -63,7 +63,8 @@ function getMyPage(id) {
 
 function addItem(id) {
   $.get((`/users/${id}/items/new`), function(data){
-  $('#js-sub').append(data)
+    let addHtml = "<br><br>" + `${data}` + "<br><br>"
+  $('#js-sub').append(addHtml)
   $('#js-next').empty("")
   })
 }

@@ -1,6 +1,0 @@
-<h2>∇  Community Members ∇ </h2>
-<h3> We are <%= @users.count %> members strong!  </h3><br>
-  <% @users.each do |u| %>
-      <h3>◦ <%= link_to u.name, user_path(u) %>  ◦</h3>
-      <p><%= u.city %>, <%= u.state %></p> <br>
-  <% end %>
