@@ -19,25 +19,11 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    if params[:search] && !params[:search].blank?
-      @items = Item.where('name LIKE ?', "%#{params[:search]}%")
-      if @items.blank?
-        flash[:message] = "There are no items that match '#{params[:search]}'."
-        redirect_to categories_path
-      end
-    else
-      @categories = Category.all
-    end
+    @categories = Category.all
     respond_to do |f|
       f.html
       f.json {render json: @categories}
     end
-  end
-
-  def pop
-    @category = Category.joins(:items).select("categories.*, COUNT(category_id) as scount").order("scount DESC").first
-    # items = Item.group(:category_id).to_a
-    # @item = items.first
   end
 
   private

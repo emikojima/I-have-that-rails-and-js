@@ -6,8 +6,9 @@ function getCategories() {
   clear()
   $.get(('/categories.json'), function(data) {
     data.forEach(category => {
+      $('#js-title').html("<h2>∇ Item Categories ∇</h2>")
       let nc =
-      `<br><h3> ∇  ${category.name} ∇ </h3>
+      `<br><h3> ◦ ${category.name} ◦ </h3>
        <h4>  ${category.description} </h4>
        <p> There is ${category.items.length} item(s) in this category </p>`
       $('#js-container').append(nc)

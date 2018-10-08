@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :page_user
   before_action :page_user_item, only: [:edit, :show, :destroy, :update]
   skip_before_action :verify_authenticity_token, only: [:destroy]
+
   def new
     if own_page?
       @item  = Item.new(user_id: @user.id)
@@ -25,7 +26,7 @@ class ItemsController < ApplicationController
     @user = User.find(params[:user_id])
 
     if @item.save
-      flash[:message] = "Item successfully created."
+      # flash[:message] = "Item successfully created."
       render :one, :layout => false
       # redirect_to user_item_path(@user, @item)
     else

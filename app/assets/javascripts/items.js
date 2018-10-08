@@ -28,11 +28,11 @@ class Item {
       <h3> ∇ ${this.name} ∇ </a></h3>
       <p> Descripton: ${this.description}</p>
       <p> From: ${this.user.name} </p>
-      <p> Located @: ${this.user.city}, ${this.user.state}</p>
+      <p> Located: ${this.user.city}, ${this.user.state}</p>
       <p> Item is: ${this.available}</p><br>
-      <h4><a href="mailto:${this.user.name}?subject=Message from IHT Re: ${this.name} &body=Message sent from IHT (I HAVE THAT App) ">
-      Email ${this.user.name} to borrow this item </a></h4><br>
-      <p><a onclick="userLink(${this.user.id})"> See More Items from ${this.user.name} </a></p>
+      <h5><a href="mailto:${this.user.name}?subject=Message from IHT Re: ${this.name} &body=Message sent from IHT (I HAVE THAT App) ">
+      ◦ Email ${this.user.name} to borrow this item ◦ </a></h5><br>
+      <h5><a onclick="userLink(${this.user.id})"> See More Items from ${this.user.name} </a></h5>
       `
       return emailHtml
     }

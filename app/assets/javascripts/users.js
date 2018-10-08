@@ -87,6 +87,7 @@ function attachListeners() {
       url: this.action,
       data: $(this).serialize(),
       success: function(response){
+        alert("Thank you for adding an item for community lending!")
         $('#js-container').append(response)
         $('#js-sub').empty()
       }

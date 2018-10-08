@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   root to: 'static#welcome'
   get 'login', to: redirect('/auth/google_oauth2'), as: 'login'
-  get '/firstpage', to: 'users#firstpage'
+  get '/firstpage', to: 'static#firstpage'
   get '/items', to: 'items#all'
   get '/signin', to: 'sessions#new'
   post '/signin', to: 'sessions#create'
