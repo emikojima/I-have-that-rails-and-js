@@ -1,17 +1,18 @@
 # README
 
 ## Description:
-I Have That (IHT) is a Rails web application and community lending app where users can sign-up for an account through their google account or create an account by providing an email address, password, and user name.
+I Have That (IHT) is a single page Rails and Javascript community lending web application where users can sign-up for an account through their google account or create an account by providing an email address, password, and user name.
 
-The purpose of this app is to share your resources. Users can lend and borrow items on IHT.
+The purpose of this app is to share your resources so we can live more sustainably. Users can lend and borrow items on IHT.
 
 Built with Rails
 ## Demo:
-![Imgur](https://media.giphy.com/media/1zgvDawO5VAx1ou5wE/giphy.gif)
+![Imgur](https://media.giphy.com/media/kv4zCPe9t0tw1IEMXe/giphy.gif)
+
 
 ## Installation:
 * You can install the rails gem by typing `gem install rails` in the command line, if you don't have it already.
-* From the command line Run `git clone git@github.com:emikojima/i-have-that-v2.git`
+* From the command line Run `git clone git@github.com:emikojima/i-have-that-rails-and-js/.git`
 * Run `bundle install`
 * Run `rake db:migrate`
 * Run `rake db:seed` to populate with seed data.
