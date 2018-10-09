@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      render 'static/firstpage'
+      redirect_to '/firstpage'
     else
       @error = @user.errors.full_messages
       render 'new'

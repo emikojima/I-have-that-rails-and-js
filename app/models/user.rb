@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :categories, through: :items
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true, uniqueness: true
-  default_scope -> { order('name ASC') }
+  # default_scope -> { order('name ASC') }
   before_save { |user| user.city = city.upcase unless user.city == nil}
   before_update { |user| user.city = city.upcase unless user.city == nil}
   before_save { |user| user.state = state.upcase unless user.state == nil}
@@ -30,7 +30,7 @@ class User < ApplicationRecord
     user = User.where(["id > ?", id]).first
     user ? user : User.first
   end
-  
+
   def address
   [street, city, state, country].compact.join(', ')
   end

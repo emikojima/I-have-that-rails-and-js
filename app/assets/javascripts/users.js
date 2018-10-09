@@ -30,13 +30,18 @@ function userLink(id) {
     clear()
     $.get(`/users/${id}.json`, function(data){
       if (data) {
-      var its = data.items
-      $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "User: " + `${data.name}` + "</h3><p>" + "Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Items Listed for Lending: " + "</h4>")
+        var its = data.items
+      $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "User: " + `${data.name}` + "</h3><p>" + "Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h3>" + "Items Listed for Lending: " + "</h3>")
 
+        if (its == "") {
+          $('#js-container').html( "<p>"+"NO ITEMS LISTED (YET)" + "</p><br>")
+        }
       its.forEach((i) =>
       $('#js-container').append(`<h4><a onclick="getThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`))
 
-      $('#js-next').html(`<button id="${id}" class="nexti" onclick="next(${id})">   Next User </button>`)
+
+      $('#js-next').html(`<button id="${id}" class="nexti">   Next User </button>`)
+
       }
         else {
           userLink(id)
@@ -45,12 +50,6 @@ function userLink(id) {
     })
 }
 
-function next(id) {
-  $.get((`/users/${id}/next.json`), function(data) {
-      userLink(data.id)
-
-  })
-}
 
 function getMyPage(id) {
   current = `${id}`
@@ -70,6 +69,7 @@ function getMyPage(id) {
 }
 
 function addItem(id) {
+  $('#js-sub').empty("")
   $.get((`/users/${id}/items/new`), function(data){
     let addHtml = "<br><br>" + `${data}` + "<br><br>"
   $('#js-sub').append(addHtml)
@@ -84,11 +84,18 @@ function deleteUser(id) {
       type: "DELETE",
       url: `/users/${id}`,
       success: function(response) {
-
           alert("Your account has been deleted");
       }
   })}
 }
+
+function next(id) {
+  $.get((`/users/${id}/next.json`), function(data) {
+    console.log(data.id)
+    userLink(data.id)
+  })
+}
+
 
 function attachListeners() {
   $('.users').on('click', function(e) {
@@ -99,6 +106,11 @@ function attachListeners() {
   $('.me').on('click', function(e) {
     e.preventDefault()
     getMyPage(this.id)
+  })
+
+  $('#js-next').on("click", ".nexti", function(e) {
+    e.preventDefault()
+    next(this.id)
   })
 
   $('#js-sub').on('submit', "#new_item", function(e) {
