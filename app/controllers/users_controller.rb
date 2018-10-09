@@ -22,18 +22,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    respond_to do |f|
-      f.html
-      f.json {render :json => @user}
-    end
+      render json: @user
   end
 
   def index
     @users = User.all
-    respond_to do |f|
-      f.html
-      f.json {render json: @users}
-    end
+    render json: @users
   end
 
   def next

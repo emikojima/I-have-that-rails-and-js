@@ -15,10 +15,7 @@ class ItemsController < ApplicationController
 
    def index
     @items = @user.items
-    respond_to do |f|
-      f.html
-      f.json {render json: @items}
-    end
+      render json: @items
    end
 
   def create
@@ -28,26 +25,18 @@ class ItemsController < ApplicationController
     if @item.save
       # flash[:message] = "Item successfully created."
       render :one, :layout => false
-      # redirect_to user_item_path(@user, @item)
     else
       @error = @item.errors.full_messages
-      # render 'new'
     end
   end
 
   def show
-    respond_to do |f|
-      f.html
-      f.json {render json: @item, only: ['@user']}
-    end
+    render json: @item, only:['@user']
   end
 
   def all
     @items = Item.search_items(params[:search])
-    respond_to do |f|
-      f.html
-      f.json {render json: @items}
-    end
+    render json: @items
     if @items.empty?
       flash[:message] = "Oh no! There are no items for lending in #{params[:search].titleize}."
       redirect_to items_path
@@ -68,13 +57,11 @@ class ItemsController < ApplicationController
   def update
     @item.update(item_params)
     render :one, :layout => false
-    # redirect_to user_item_path(@user, @item)
   end
 
   def destroy
     @item.delete
      render json: @user
-    # redirect_to user_items_path(@user)
   end
 
   private
