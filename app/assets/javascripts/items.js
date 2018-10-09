@@ -30,7 +30,7 @@ class Item {
       <p> From: ${this.user.name} </p>
       <p> Located: ${this.user.city}, ${this.user.state}</p>
       <p> Item is: ${this.available}</p><br>
-      <h5><a href="mailto:${this.user.name}?subject=Message from IHT Re: ${this.name} &body=Message sent from IHT (I HAVE THAT App) ">
+      <h5><a href="mailto:${this.user.email}?subject=Message from IHT Re: ${this.name} &body=Message sent from IHT (I HAVE THAT App), encode: "javascript" ">
       ◦ Email ${this.user.name} to borrow this item ◦ </a></h5><br>
       <h5><a onclick="userLink(${this.user.id})"> See More Items from ${this.user.name} </a></h5>
       `

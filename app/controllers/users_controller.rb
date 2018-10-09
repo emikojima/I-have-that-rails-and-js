@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:destroy]
+
   def new
     if !logged_in?
       @user = User.new
     else
-      redirect_to user_items_path
+      render 'static/firstpage'
     end
   end
 
@@ -11,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_path(@user)
+      render 'static/firstpage'
     else
       @error = @user.errors.full_messages
       render 'new'
@@ -32,6 +34,12 @@ class UsersController < ApplicationController
       f.html
       f.json {render json: @users}
     end
+  end
+
+  def next
+    @user = User.find_by(id: params[:id])
+    @next = @user.next
+    render json: @next
   end
 
   def edit

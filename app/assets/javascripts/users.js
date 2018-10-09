@@ -1,10 +1,10 @@
-// $(document).on('turbolinks:load', function() {
-//   alert("turbolinks:load")
-//   attachListeners();
-// })
-$(function(){
+$(document).on('turbolinks:load', function() {
+  alert("turbolinks:load")
   attachListeners();
 })
+// $(function(){
+//   attachListeners();
+// })
 
 function getUsers() {
   $.get('/users.json', function(data) {
@@ -26,35 +26,43 @@ function clear() {
 }
 
 function userLink(id) {
+
     clear()
     $.get(`/users/${id}.json`, function(data){
       if (data) {
       var its = data.items
-
       $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "User: " + `${data.name}` + "</h3><p>" + "Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Items Listed for Lending: " + "</h4>")
 
       its.forEach((i) =>
       $('#js-container').append(`<h4><a onclick="getThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`))
 
-      $('#js-next').html(`<button id="${id + 1}" class="nexti" onclick="userLink(${id + 1})">   Next User </button>`)
+      $('#js-next').html(`<button id="${id}" class="nexti" onclick="next(${id})">   Next User </button>`)
       }
         else {
-          userLink(1)
+          userLink(id)
 
         }
     })
 }
 
+function next(id) {
+  $.get((`/users/${id}/next.json`), function(data) {
+      userLink(data.id)
+
+  })
+}
 
 function getMyPage(id) {
+  current = `${id}`
   $.get((`/users/${id}.json`), function(data) {
-    var current = data.id
     var its = data.items
     clear()
 
-    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h4>" + "Your Items" + "</h4><p>" + "(Click on Item to Edit) " + "</p>")
+    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h3>" + "Your Items" + "</h3><p>" + "(Click on Item to Edit) " + "</p>")
 
     $('#js-next').append(`<br><h5><a onclick="addItem(${current})"> Add an Item </a></h5>`)
+      $('#js-sub').append(`<br><h5><button onclick="deleteUser(${current})"> Delete Your Account </button></h5>`)
+
 
     its.forEach((i) =>
     $('#js-container').append(`<h4><a onclick="editThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4>`))
@@ -67,6 +75,19 @@ function addItem(id) {
   $('#js-sub').append(addHtml)
   $('#js-next').empty("")
   })
+}
+
+function deleteUser(id) {
+  var c = confirm("Are you sure you want to delete your account?")
+  if (c === true) {
+  $.ajax({
+      type: "DELETE",
+      url: `/users/${id}`,
+      success: function(response) {
+
+          alert("Your account has been deleted");
+      }
+  })}
 }
 
 function attachListeners() {

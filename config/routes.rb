@@ -11,10 +11,10 @@ Rails.application.routes.draw do
   get 'login', to: redirect('/auth/google_oauth2'), as: 'login'
   get '/firstpage', to: 'static#firstpage'
   get '/items', to: 'items#all'
+  get '/users/:id/next', to: 'users#next'
   get '/signin', to: 'sessions#new'
   post '/signin', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   post '/logout', to: 'sessions#destroy'
-  get '/popular', to: 'categories#pop'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

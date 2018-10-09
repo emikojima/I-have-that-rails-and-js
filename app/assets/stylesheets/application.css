@@ -19,9 +19,11 @@
     background-size: 130%;
   }
 
+
+
   .firstpage {
     font-family: "Didot", serif;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 1.6 ;
     background: url("nature2.jpg");
     color: white;
@@ -126,6 +128,10 @@
 
   p {
     font-size: 90%;
+  }
+
+  h3 {
+    font-family: "Didot", serif;
   }
 
   .main {
