@@ -34,7 +34,7 @@ function userLink(id) {
           $('#js-container').html( "<p>"+"NO ITEMS LISTED (YET)" + "</p><br>")
         }
       its.forEach((i) =>
-      $('#js-container').append(`<h4><a onclick="getThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`))
+      $('#js-container').append(`<h4><a onclick="getItem(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`))
       $('#js-next').html(`<button id="${id}" class="nexti">   Next User </button>`)
     } else {
         userLink(id)
@@ -54,18 +54,11 @@ function getMyPage(id) {
       $('#js-sub').append(`<br><h5><button onclick="deleteUser(${current})"> Delete Your Account </button></h5>`)
 
     its.forEach((i) =>
-    $('#js-container').append(`<h4><a onclick="editThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4>`))
+    $('#js-container').append(`<h4><a onclick="editItem(${id}, ${i.id})">◦ ${i.name} ◦</a></h4>`))
   })
 }
 
-function addItem(id) {
-  $('#js-sub').empty("")
-  $.get((`/users/${id}/items/new`), function(data){
-    let addHtml = "<br><br>" + `${data}` + "<br><br>"
-  $('#js-sub').append(addHtml)
-  $('#js-next').empty("")
-  })
-}
+
 
 function deleteUser(id) {
   var c = confirm("Are you sure you want to delete your account?")

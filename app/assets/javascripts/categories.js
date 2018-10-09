@@ -14,7 +14,7 @@ function getCategories() {
       $('#js-container').append(nc)
       category.items.forEach(item => {
         let c =
-          `<li><a onclick="getThis(${item.user_id}, ${item.id})">◦ ${item.name} ◦</a></li>`
+          `<li><a onclick="getItem(${item.user_id}, ${item.id})">◦ ${item.name} ◦</a></li>`
           $('#js-container').append(c)
       })
     })

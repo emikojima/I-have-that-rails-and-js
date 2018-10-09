@@ -14,7 +14,7 @@ class Item {
     formatIndex() {
       this.available ? this.available = "Available" : this.available = "Currently UNAVAILABLE"
       let itemHtml = `
-      <li><h3><a id="${this.id}" onclick="getThis(${this.user_id},${this.id})"> ∇ ${this.name} ∇ </a></h3>
+      <li><h3><a id="${this.id}" onclick="getItem(${this.user_id},${this.id})"> ∇ ${this.name} ∇ </a></h3>
       <p> ${this.description}</p>
       <p> From: ${this.user.name} @ ${this.user.city}, ${this.user.state}</p>
       <p> Item is: ${this.available}</p><br></li>
@@ -40,7 +40,7 @@ class Item {
 
   function getItems() {
     clear()
-    let x = `<h3>Search Items  <input type="text" id="myInput" onkeyup="myFind()" placeholder="Item name ..." title="Type in a name" ></h3> <br>`
+    let x = `<h3>Search Items  <input type="text" id="myInput" onkeyup="searchItem()" placeholder="Item name ..." title="Type in a name" ></h3> <br>`
     $('#everything').append(x)
     $.get(("/items.json"), function(data) {
       data.forEach(item => {
@@ -51,7 +51,7 @@ class Item {
     })
   }
 
-  function myFind() {
+  function searchItem() {
     var input, filter, ul, li, a, i;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
@@ -66,7 +66,7 @@ class Item {
         }
     }}
 
-  function getThis(uid,id) {
+  function getItem(uid,id) {
     clear()
     $.get((`/users/${uid}/items/${id}.json`), function(data) {
       let newIt = new Item(data)
@@ -75,12 +75,21 @@ class Item {
     })
   }
 
-  function editThis(uid, id) {
+  function editItem(uid, id) {
     $.get((`/users/${uid}/items/${id}/edit`), function(form) {
       clear()
       let d = `<button onclick="deleteItem(${uid}, ${id})" id="deleteItem"> Delete This Item  </button>`
       $('#js-sub').append(form)
       $('#js-sub').append(d)
+    })
+  }
+
+  function addItem(id) {
+    $('#js-sub').empty("")
+    $.get((`/users/${id}/items/new`), function(data){
+      let addHtml = "<br><br>" + `${data}` + "<br><br>"
+    $('#js-sub').append(addHtml)
+    $('#js-next').empty("")
     })
   }
 
