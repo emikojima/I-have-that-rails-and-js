@@ -1,5 +1,4 @@
 $(document).on('turbolinks:load', function() {
-  alert("turbolinks:load")
   attachListeners();
 })
 // $(function(){
@@ -26,30 +25,22 @@ function clear() {
 }
 
 function userLink(id) {
-
-    clear()
-    $.get(`/users/${id}.json`, function(data){
-      if (data) {
-        var its = data.items
+  clear()
+  $.get(`/users/${id}.json`, function(data){
+    if (data) {
+      var its = data.items
       $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "User: " + `${data.name}` + "</h3><p>" + "Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h3>" + "Items Listed for Lending: " + "</h3>")
-
         if (its == "") {
           $('#js-container').html( "<p>"+"NO ITEMS LISTED (YET)" + "</p><br>")
         }
       its.forEach((i) =>
       $('#js-container').append(`<h4><a onclick="getThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`))
-
-
       $('#js-next').html(`<button id="${id}" class="nexti">   Next User </button>`)
-
+    } else {
+        userLink(id)
       }
-        else {
-          userLink(id)
-
-        }
-    })
+  })
 }
-
 
 function getMyPage(id) {
   current = `${id}`
@@ -61,7 +52,6 @@ function getMyPage(id) {
 
     $('#js-next').append(`<br><h5><a onclick="addItem(${current})"> Add an Item </a></h5>`)
       $('#js-sub').append(`<br><h5><button onclick="deleteUser(${current})"> Delete Your Account </button></h5>`)
-
 
     its.forEach((i) =>
     $('#js-container').append(`<h4><a onclick="editThis(${id}, ${i.id})">◦ ${i.name} ◦</a></h4>`))
@@ -84,18 +74,16 @@ function deleteUser(id) {
       type: "DELETE",
       url: `/users/${id}`,
       success: function(response) {
-          alert("Your account has been deleted");
+        alert("Your account has been deleted");
       }
   })}
 }
 
 function next(id) {
   $.get((`/users/${id}/next.json`), function(data) {
-    console.log(data.id)
     userLink(data.id)
   })
 }
-
 
 function attachListeners() {
   $('.users').on('click', function(e) {

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
-  resources :categories
+  resources :categories, only:[:new, :create, :index]
   resources :users, except:[:show]
   resources :users, only:[:show] do
   resources :items, only:[:show, :index, :new, :edit, :create, :update, :destroy]

@@ -22,7 +22,6 @@ function getCategories() {
 }
 
 function eListeners() {
-
   $('.categories').on('click', function(e) {
     e.preventDefault()
     getCategories()
@@ -44,12 +43,10 @@ function eListeners() {
       url: this.action,
       data: $(this).serialize(),
       success: function(response){
-
         $('#js-container').append("<li>" + `${response}` + "</li>")
         $('.new_category').empty()
         $('h2').empty()
           $('#js-title').append("<h2>" + "Categories" + "</h2>")
-
       }
     })
   })

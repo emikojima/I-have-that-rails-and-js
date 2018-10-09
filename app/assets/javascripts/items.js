@@ -66,7 +66,6 @@ class Item {
         }
     }}
 
-
   function getThis(uid,id) {
     clear()
     $.get((`/users/${uid}/items/${id}.json`), function(data) {
@@ -95,7 +94,6 @@ class Item {
         }
     })
   }
-
 
   function attachEventListeners() {
     $('.items-list').on('click', function(e) {
