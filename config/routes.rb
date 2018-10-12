@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   resources :categories, only:[:new, :create, :index]
   resources :users, except:[:show]
   resources :users, only:[:show] do
-  resources :items, only:[:show, :index, :new, :edit, :create, :update, :destroy]
-
+    resources :items, only:[:show, :index, :new, :edit, :create, :update, :destroy]
   end
   root to: 'static#welcome'
   get 'login', to: redirect('/auth/google_oauth2'), as: 'login'

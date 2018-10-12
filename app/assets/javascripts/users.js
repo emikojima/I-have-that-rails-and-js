@@ -6,8 +6,7 @@ $(document).on('turbolinks:load', function() {
 // })
 
 function getUsers() {
-  $.get('/users.json', function(data) {
-    var users = data
+  $.get('/users.json', function(users) {
     clear()
     $('#js-title').html("<h2>" + "∇ Community Members ∇"  + "</h2>")
     users.forEach((user) =>
@@ -27,41 +26,20 @@ function clear() {
 function userLink(id) {
   clear()
   $.get(`/users/${id}.json`, function(data){
-    if (data) {
-      var its = data.items
+      const its = data.items
       $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "User: " + `${data.name}` + "</h3><p>" + "Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h3>" + "Items Listed for Lending: " + "</h3>")
         if (its == "") {
           $('#js-container').html( "<p>"+"NO ITEMS LISTED (YET)" + "</p><br>")
         }
       its.forEach((i) =>
-      $('#js-container').append(`<h4><a onclick="getItem(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`))
+        $('#js-container').append(`<h4><a onclick="getItem(${id}, ${i.id})">◦ ${i.name} ◦</a></h4><p> Description:  ${i.description} </p> <p> Availabile: ${i.available} </p><br>`)
+      )
       $('#js-next').html(`<button id="${id}" class="nexti">   Next User </button>`)
-    } else {
-        userLink(id)
-      }
   })
 }
-
-function getMyPage(id) {
-  current = `${id}`
-  $.get((`/users/${id}.json`), function(data) {
-    var its = data.items
-    clear()
-
-    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h3>" + "Your Items" + "</h3><p>" + "(Click on Item to Edit) " + "</p>")
-
-    $('#js-next').append(`<br><h5><a onclick="addItem(${current})"> Add an Item </a></h5>`)
-      $('#js-sub').append(`<br><h5><button onclick="deleteUser(${current})"> Delete Your Account </button></h5>`)
-
-    its.forEach((i) =>
-    $('#js-container').append(`<h4><a onclick="editItem(${id}, ${i.id})">◦ ${i.name} ◦</a></h4>`))
-  })
-}
-
-
 
 function deleteUser(id) {
-  var c = confirm("Are you sure you want to delete your account?")
+  let c = confirm("Are you sure you want to delete your account?")
   if (c === true) {
   $.ajax({
       type: "DELETE",
@@ -75,6 +53,22 @@ function deleteUser(id) {
 function next(id) {
   $.get((`/users/${id}/next.json`), function(data) {
     userLink(data.id)
+  })
+}
+
+function getMyPage(id) {
+  current = `${id}`
+  $.get((`/users/${id}.json`), function(data) {
+    const itss = data.items
+    clear()
+
+    $('#js-title').html("<h4>" + "Δ Δ Δ" + "</h4><h3>" + "Hello, " + `${data.name}` + "</h3><p>" + "Your Location: " + `${data.city}` + ", " +`${data.state}` + "</p> <h4>" + "∇ ∇ ∇" + "</h4><br><h3>" + "Your Items" + "</h3><p>" + "(Click on Item to Edit) " + "</p>")
+
+    $('#js-next').append(`<br><h5><a onclick="addItem(${current})"> Add an Item </a></h5>`)
+      $('#js-sub').append(`<br><h5><button onclick="deleteUser(${current})"> Delete Your Account </button></h5>`)
+
+    itss.forEach((i) =>
+    $('#js-container').append(`<h4><a onclick="editItem(${id}, ${i.id})">◦ ${i.name} ◦</a></h4>`))
   })
 }
 

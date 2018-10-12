@@ -31,6 +31,15 @@ class ItemsController < ApplicationController
   end
 
   def show
+    # cui = @item.user_id == current_user.id
+    # json = @item.as_json
+    # json["user.name"]= @item.user.name
+    # json["user.city"]= @item.user.city
+    # json["user.state"]= @item.user.state
+    # json["user.email"]= @item.user.email
+    # json["current_user"] = cui
+    # @item = json
+    # render json: @item
     render json: @item, only:['@user']
   end
 
