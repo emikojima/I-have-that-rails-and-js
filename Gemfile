@@ -3,7 +3,8 @@ gem 'actionview-encoded_mail_to', '~> 1.0', '>= 1.0.9'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', group: :development
+gem 'pg', '0.18.1', group: :production
 # Use Puma as the app server
 gem 'thin'
 gem 'puma', '~> 3.7'
@@ -17,7 +18,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 # gem 'bootstrap'
 # gem 'jquery-rails'
 # bootstrap
-
+gem 'rails_12factor', group: :production
 gem 'bootstrap-sass', '3.3.7'
 
 # Use CoffeeScript for .coffee assets and views
