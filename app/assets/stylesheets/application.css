@@ -177,13 +177,6 @@
     float: none;
     width: 100%;
   }
-
-  .sidebar {
-    background: transparent;
-    border: none;
-    border-top: 2px solid #ccc;
-    padding: 0;
-  }
 }
 
 
