@@ -6,20 +6,18 @@
   }
 
   html, body {
-    text-align: center;
     height: 100%;
+    text-align: center;
     width: 100%;
   }
 
   /* --- Page Styles --- */
   body {
-   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-   line-height:  1.6;
     background: url("nature2.jpg");
     background-size: 130%;
+   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+   line-height:  1.6;
   }
-
-
 
   .firstpage {
     font-family: "Didot", serif;
@@ -71,10 +69,6 @@
     padding: 1.25%; /* 18px / 800px */
     width: 85%;
   }
-  /* .image_responsive_main_page {
-  background: url("nature1.jpg") no-repeat;
-   background-size: 100% 100%;
- } */
 
   .end {
     background:lightgray;
@@ -115,7 +109,6 @@
 
   .field_with_errors {
       border: 1px solid red;
-      display: inline; 
   }
 
   ol {
@@ -170,7 +163,7 @@
      font-weight: bold;
 
   }
-
+}
 
 @media screen and (max-width: 600px) {
   .wrapper {
@@ -191,7 +184,7 @@
     border-top: 2px solid #ccc;
     padding: 0;
   }
-
+}
 
 
 
